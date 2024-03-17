@@ -3,6 +3,8 @@ const router = express.Router();
 const auth = require('../controllers/auth.js');
 const mw = require('../middleware');
 
+router.get('/', mw.checkAuth, auth.getUser);
+
 router.post(
   '/register',
   mw.checkPayload({ name: 'string', email: 'string', password: 'string' }),

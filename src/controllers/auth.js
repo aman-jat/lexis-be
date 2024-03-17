@@ -43,11 +43,9 @@ const register = async (req, res) => {
     return res.status(201).json(user);
   } catch (error) {
     console.error('Error creating user:', error);
-    return res
-      .status(500)
-      .json({
-        message: 'An unexpected error occurred while creating the user.',
-      });
+    return res.status(500).json({
+      message: 'An unexpected error occurred while creating the user.',
+    });
   }
 };
 
@@ -102,8 +100,19 @@ const logout = async (req, res) => {
   }
 };
 
+const getUser = async (req, res) => {
+  try {
+    const { password, ...rest } = req.user.toJSON();
+    return res.status(200).json(rest);
+  } catch (error) {
+    console.error('Error logging out:', error);
+    return res.status(500).json({ message: 'An unexpected error occurred' });
+  }
+};
+
 module.exports = {
   login,
   register,
   logout,
+  getUser,
 };
