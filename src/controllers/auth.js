@@ -40,7 +40,7 @@ const register = async (req, res) => {
     );
     await user.update({ sessionToken });
     const { password, ...rest } = user.toJSON();
-    return res.status(201).json({ user: rest });
+    return res.status(201).json(user);
   } catch (error) {
     console.error('Error creating user:', error);
     return res
@@ -79,7 +79,7 @@ const login = async (req, res) => {
 
     await user.update({ sessionToken });
     const { password, ...rest } = user.toJSON();
-    return res.status(201).json({ user: rest });
+    return res.status(201).json(rest);
   } catch (error) {
     console.error('Error logging in:', error);
     return res
