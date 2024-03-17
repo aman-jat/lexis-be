@@ -27,7 +27,7 @@ const checkPayload = requiredFields => {
       if (invalidFields.length > 0) {
         errorMessage.push(`Invalid fields: ${invalidFields.join(', ')}`);
       }
-      return res.status(400).json({ error: errorMessage.join('. ') });
+      return res.status(400).json({ message: errorMessage.join('. ') });
     }
 
     next();
@@ -58,7 +58,7 @@ const checkAuth = async (req, res, next) => {
   } catch (error) {
     console.error('Error verifying authentication token:', error);
     return res.status(401).json({
-      error: 'Authentication failed. Please login again to continue.',
+      message: 'Authentication failed. Please login again to continue.',
     });
   }
 };

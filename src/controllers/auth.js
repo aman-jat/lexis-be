@@ -10,14 +10,14 @@ const register = async (req, res) => {
     const existingUser = await db.user.findOne({ where: { email } });
     if (existingUser) {
       return res.status(400).json({
-        error: 'Email already exists. Please choose a different email.',
+        message: 'Email already exists. Please choose a different email.',
       });
     }
 
     // Validate password
     if (!/^[a-zA-Z0-9]{4,}$/.test(Password)) {
       return res.status(400).json({
-        error:
+        message:
           'Password must be at least 4 characters long and can contain numbers, lowercase letters, and uppercase letters.',
       });
     }
@@ -45,7 +45,9 @@ const register = async (req, res) => {
     console.error('Error creating user:', error);
     return res
       .status(500)
-      .json({ error: 'An unexpected error occurred while creating the user.' });
+      .json({
+        message: 'An unexpected error occurred while creating the user.',
+      });
   }
 };
 
@@ -56,7 +58,7 @@ const login = async (req, res) => {
     // Check if the user exists
     const user = await db.user.findOne({ where: { email } });
     if (!user) {
-      return res.status(401).json({ error: 'Invalid email or password.' });
+      return res.status(401).json({ message: 'Invalid email or password.' });
     }
 
     // Compare passwords
@@ -65,7 +67,7 @@ const login = async (req, res) => {
       user.toJSON().password
     );
     if (!passwordMatch) {
-      return res.status(401).json({ error: 'Invalid email or password.' });
+      return res.status(401).json({ message: 'Invalid email or password.' });
     }
 
     // Generate JWT token
@@ -84,7 +86,7 @@ const login = async (req, res) => {
     console.error('Error logging in:', error);
     return res
       .status(500)
-      .json({ error: 'An unexpected error occurred while logging in.' });
+      .json({ message: 'An unexpected error occurred while logging in.' });
   }
 };
 
@@ -96,7 +98,7 @@ const logout = async (req, res) => {
     console.error('Error logging out:', error);
     return res
       .status(500)
-      .json({ error: 'An unexpected error occurred while logging out.' });
+      .json({ message: 'An unexpected error occurred while logging out.' });
   }
 };
 
