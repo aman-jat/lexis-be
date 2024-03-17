@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const authRouter = require('./routes/auth');
+const movieRouter = require('./routes/movie');
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(function (err, _, res, next) {
 });
 
 app.use('/api/auth', authRouter);
+app.use('/api/movie', movieRouter);
 
 app.listen(process.env.PORT, () =>
   console.log(`App listening at http://localhost:${process.env.PORT}`)
