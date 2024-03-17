@@ -12,7 +12,7 @@ const getAll = async (req, res) => {
       limit: endIndex - startIndex,
     });
 
-    res.status(200).json({ movies });
+    res.status(200).json(movies);
   } catch (error) {
     console.error('Error fetching movies:', error);
     res
