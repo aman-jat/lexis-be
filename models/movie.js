@@ -30,7 +30,7 @@ Movie.init(
       allowNull: true,
     },
     genre: {
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: true,
     },
     runtime: {
